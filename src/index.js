@@ -1,10 +1,14 @@
 import { compareAsc, format } from "date-fns";
-import { Todos } from './todosClass.js';
+import { tasks } from './task.js';
+
+let todo = tasks.createTodos('tit', 'sdfuh',
+                format(new Date(2024, 4, 23), "yyyy-MM-dd"),
+                'important');
+
+                console.log(todo);
 
 
 
-let todos = new Todos('tt', 'desc', 
-            format(new Date(2024, 4, 23), "yyyy-MM-dd"), 'important');
 
 
 
