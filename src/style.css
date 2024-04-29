@@ -42,3 +42,45 @@ header {
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 8px;
 }
+
+/* main section style */
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    gap: 4em;
+}
+
+.project-title {
+    font-size: 2em;
+}
+
+.project-tasks {
+    display:flex;
+    flex-direction: column;
+    width:60%;
+}
+
+.project-tasks .head, .tasks .task {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-tasks .head {
+    padding: 1em 0;
+}
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+}
+
+.task > div {
+    display: flex;
+    width: 160px;
+    gap: 8px;
+}
+
+
+
