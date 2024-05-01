@@ -10,6 +10,6 @@ addTodosBtn.onclick = () => { handlerDom.addTodosHandler() }
 const addProjectbtn = document.querySelector('#add-project-btn');
 addProjectbtn.onclick = () => { handlerDom.addProjectHandler() }
 
-
+handlerDom.showTasks('myProject');
 
 

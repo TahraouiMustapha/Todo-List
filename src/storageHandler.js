@@ -5,8 +5,14 @@ const storage = (function() {
                             JSON.stringify(project.array));
     }
 
+    function getTasksFormStorage(projectTitle) {
+        const myProject = JSON.parse(localStorage.getItem(projectTitle));
+        return myProject;
+    }
+
     return {
-        addInStorage
+        addInStorage,
+        getTasksFormStorage
     }
 })();
 

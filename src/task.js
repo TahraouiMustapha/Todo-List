@@ -14,7 +14,20 @@ const tasks = (function() {
     class Project {
         constructor(title) {
             this.title = title
-            this.array = []
+            this.array = [
+                {
+                    title: 'title',
+                    content: 'leshommes'
+                },
+                {
+                    title: 'title',
+                    content: 'leshommes'
+                },
+                {
+                    title: 'title',
+                    content: 'leshommes'
+                }
+            ]
         }
     }
 

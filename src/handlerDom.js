@@ -16,6 +16,10 @@ const handlerDom = (function (){
         return btn;
     }
 
+    function createTaskDiv(taskObj) {
+        return document.createElement('div');
+    }
+
     function addTodosHandler(){
         const dialog = document.createElement('dialog');
         const myForm = document.createElement('myform');
@@ -124,11 +128,11 @@ const handlerDom = (function (){
 
                 head.appendChild(headTitle);
                 head.appendChild(headBtn);
-
-            const tasks = document.createElement('div');
+            //show Tasks of project:
+            const tasks = showTasks(dataTitle);
             tasks.classList.add('tasks');
-                //show Tasks of project:
-
+            console.log(tasks);
+                
             projectTasks.appendChild(head);
             projectTasks.appendChild(tasks);
 
@@ -137,10 +141,21 @@ const handlerDom = (function (){
         main.appendChild(projectTasks);
     }
 
+    function showTasks(dataTitle) {
+        const myDiv = document.createElement('div');
+        const myArray = storage.getTasksFormStorage(dataTitle);
+        myArray.forEach((task) => {
+            myDiv.appendChild(createTaskDiv(task));
+        })
+
+        return myDiv;
+    }
+
     return {
         addTodosHandler,
         addProjectHandler,
-        showProject
+        showProject,
+        showTasks
     }
 })()
 
