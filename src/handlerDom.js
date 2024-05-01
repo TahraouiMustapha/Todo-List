@@ -31,8 +31,8 @@ const handlerDom = (function (){
         const btn = document.createElement('button');
         btn.textContent = 'add task';
         btn.type = 'submit';
-        btn.addEventListener('click', (e) => {
-            e.target.preventDefault;
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
             const task = tasks.createTodos(title.value,
                             desc.value,
                         dueDate.value,
@@ -52,11 +52,32 @@ const handlerDom = (function (){
         myForm.method = 'dialog';
         dialog.appendChild(myForm);
         document.body.appendChild(dialog); 
-        dialog.showModal();
+        dialog.show();
     }
 
     function addProjectHandler() {
+        const myDialog = document.createElement('dialog');
+        const myForm = document.createElement('form');
 
+        const inputTitle = document.createElement('input');
+        inputTitle.classList.add('new-project-title');
+        
+        const btn = document.createElement('button');
+        btn.textContent = 'Add';
+        btn.type = 'submit';
+        btn.addEventListener('click', (event) => {
+            event.preventDefault();
+        })
+
+
+        myForm.appendChild(inputTitle);
+        myForm.appendChild(btn);
+
+
+        myForm.method = 'dialog';
+        myDialog.appendChild(myForm);
+        document.body.appendChild(myDialog);
+        myDialog.show();
     }
 
 

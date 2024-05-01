@@ -7,6 +7,8 @@ const addTodosBtn = document.querySelector('#add-task-btn');
 
 addTodosBtn.onclick = () => { handlerDom.addTodosHandler() }
 
+const addProjectbtn = document.querySelector('#add-project-btn');
+addProjectbtn.onclick = () => { handlerDom.addProjectHandler() }
 
 
 
