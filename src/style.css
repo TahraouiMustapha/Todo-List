@@ -40,7 +40,7 @@ header {
     background-position: center;
 }
 
-.menu-btn {
+header .menu-btn {
     width:32px;
     height:32px;
     background-image: url('./img/menu-btn.svg');
@@ -68,7 +68,9 @@ header {
     width:60%;
 }
 
-.project-tasks .head, .tasks .task {
+.project-tasks .head, 
+.tasks .task ,
+.menu .head {
     display: flex;
     justify-content: space-between;
 }
@@ -88,5 +90,44 @@ header {
     gap: 8px;
 }
 
+/* menu bar style */
+.menu {
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    background-color: #fff;
+}
+
+.above-side ,
+.menu .projects-container {
+    display: grid;
+    grid-template-rows: repeat(5, 48px);
+    gap: 16px;
+}
+
+.above-side ,
+.bottom-side{
+    padding: 32px;
+}
+
+.bottom-side {
+    flex:1;
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+.menu .menu-btn {
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    cursor: pointer;
+    background-color: #cbd5e1;
+}
+
+.menu .head {
+    padding: 16px;
+}
 
 
