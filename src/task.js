@@ -1,3 +1,4 @@
+import { functions } from "lodash";
 
 const tasks = (function() {
     class Todos {
@@ -10,12 +11,24 @@ const tasks = (function() {
         }
     }
 
+    class Project {
+        constructor(title) {
+            this.title = title
+            this.array = []
+        }
+    }
+
     function createTodos(title, desc, dueDate,priority) {
         return new Todos(title, desc, dueDate, priority);
     }
 
+    function createProject(title){
+        return new Project(title);
+    }
+
     return {
-        createTodos
+        createTodos,
+        createProject
     }
     
 })();

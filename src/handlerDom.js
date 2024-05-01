@@ -1,4 +1,5 @@
 import { tasks } from "./task.js";
+import { storage } from "./storageHandler.js";
 
 
 const handlerDom = (function (){
@@ -61,20 +62,27 @@ const handlerDom = (function (){
 
         const inputTitle = document.createElement('input');
         inputTitle.classList.add('new-project-title');
+        inputTitle.required = true;
         
         const btn = document.createElement('button');
         btn.textContent = 'Add';
         btn.type = 'submit';
         btn.addEventListener('click', (event) => {
             event.preventDefault();
+            let newProject ;
+            if(inputTitle.value != ''){
+                newProject = tasks.createProject(inputTitle.value);
+                //2.logic create btn + datatitle later is here
+                //3.add in local Storage
+                storage.addInStorage(newProject);
+            } 
+            
         })
 
 
         myForm.appendChild(inputTitle);
         myForm.appendChild(btn);
 
-
-        myForm.method = 'dialog';
         myDialog.appendChild(myForm);
         document.body.appendChild(myDialog);
         myDialog.show();
