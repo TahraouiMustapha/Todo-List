@@ -37,6 +37,8 @@ const handlerDom = (function (){
                             desc.value,
                         dueDate.value,
                         priority.value);
+                        
+            console.log(task);                        
         })
 
         myForm.appendChild(title);
@@ -53,8 +55,15 @@ const handlerDom = (function (){
         dialog.showModal();
     }
 
+    function addProjectHandler() {
+
+    }
+
+
+
     return {
-        addTodosHandler
+        addTodosHandler,
+        addProjectHandler
     }
 })()
 
