@@ -3,6 +3,19 @@ import { storage } from "./storageHandler.js";
 
 
 const handlerDom = (function (){
+
+    function createProjectBtn(dataTitle) {
+        const btn = document.createElement('div');
+        btn.classList.add('menu-btn');
+        btn.dataset.title = dataTitle;
+        btn.textContent = dataTitle;
+        btn.addEventListener('click', (e) => {
+            handlerDom.showProject(e.target.dataset.title);
+        });
+
+        return btn;
+    }
+
     function addTodosHandler(){
         const dialog = document.createElement('dialog');
         const myForm = document.createElement('myform');
@@ -39,7 +52,6 @@ const handlerDom = (function (){
                         dueDate.value,
                         priority.value);
                         
-            console.log(task);                        
         })
 
         myForm.appendChild(title);
@@ -57,6 +69,7 @@ const handlerDom = (function (){
     }
 
     function addProjectHandler() {
+        const projectContainer = document.querySelector('.bottom-side .projects-container');
         const myDialog = document.createElement('dialog');
         const myForm = document.createElement('form');
 
@@ -71,8 +84,9 @@ const handlerDom = (function (){
             event.preventDefault();
             let newProject ;
             if(inputTitle.value != ''){
-                newProject = tasks.createProject(inputTitle.value);
-                //2.logic create btn + datatitle later is here
+                newProject = tasks.createProject(inputTitle.value.toString());
+                //2.create btn with data-title 
+                projectContainer.appendChild(createProjectBtn(newProject.title));
                 //3.add in local Storage
                 storage.addInStorage(newProject);
             } 
@@ -88,11 +102,45 @@ const handlerDom = (function (){
         myDialog.show();
     }
 
+    function showProject(dataTitle) {
+        const main = document.querySelector('.main');
 
+        const projectTitle = document.createElement('h2');
+        projectTitle.classList.add('project-title');
+        projectTitle.textContent = dataTitle;
+
+        const projectTasks = document.createElement('div');
+        projectTasks.classList.add('project-tasks');
+
+            const head = document.createElement('div');
+            head.classList.add('head');
+
+                const headTitle = document.createElement('p');
+                headTitle.textContent = `Tasks (0)`;//${storage.getLenght(dataTitle)}
+
+                const headBtn = document.createElement('button');
+                headBtn.textContent = '+';
+                headBtn.id = 'add-task-btn';
+
+                head.appendChild(headTitle);
+                head.appendChild(headBtn);
+
+            const tasks = document.createElement('div');
+            tasks.classList.add('tasks');
+                //show Tasks of project:
+
+            projectTasks.appendChild(head);
+            projectTasks.appendChild(tasks);
+
+
+        main.appendChild(projectTitle);
+        main.appendChild(projectTasks);
+    }
 
     return {
         addTodosHandler,
-        addProjectHandler
+        addProjectHandler,
+        showProject
     }
 })()
 
