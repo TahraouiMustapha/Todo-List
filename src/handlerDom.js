@@ -1,5 +1,8 @@
 import { tasks } from "./task.js";
 import { storage } from "./storageHandler.js";
+import myDeleteImage from './img/delete.svg';
+import myEditImage from './img/edit.svg';
+import myInfoImage from './img/info.svg';
 
 
 const handlerDom = (function (){
@@ -17,7 +20,46 @@ const handlerDom = (function (){
     }
 
     function createTaskDiv(taskObj) {
-        return document.createElement('div');
+        const myTask = document.createElement('div');
+        myTask.classList.add('task');
+        
+            const myDiv1 = document.createElement('div');
+                const completed = document.createElement('div');
+                completed.classList.add('completed');
+                //rest the priority
+                //rest the completed func
+
+                const taskTitle = document.createElement('p');
+                taskTitle.classList.add('title');
+                taskTitle.textContent = taskObj.title;
+            
+                myDiv1.appendChild(completed);
+                myDiv1.appendChild(taskTitle);
+
+            const myDiv2 = document.createElement('div');
+            myDiv2.classList.add('details-side');
+                const myDate = document.createElement('div');
+                myDate.classList.add('date');
+                myDate.textContent = taskObj.dueDate;
+
+                const img1 = new Image();
+                img1.src = myEditImage;
+
+                const img2 = new Image();
+                img2.src = myInfoImage;
+
+                const img3 = new Image();
+                img3.src = myDeleteImage; 
+
+                myDiv2.appendChild(myDate);
+                myDiv2.appendChild(img1);
+                myDiv2.appendChild(img2);
+                myDiv2.appendChild(img3);
+
+            myTask.appendChild(myDiv1);
+            myTask.appendChild(myDiv2);
+
+        return myTask;
     }
 
     function addTodosHandler(){
@@ -131,7 +173,6 @@ const handlerDom = (function (){
             //show Tasks of project:
             const tasks = showTasks(dataTitle);
             tasks.classList.add('tasks');
-            console.log(tasks);
                 
             projectTasks.appendChild(head);
             projectTasks.appendChild(tasks);

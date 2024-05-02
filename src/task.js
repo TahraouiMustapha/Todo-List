@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 
 const tasks = (function() {
     class Todos {
@@ -14,18 +15,10 @@ const tasks = (function() {
         constructor(title) {
             this.title = title
             this.array = [
-                {
-                    title: 'title',
-                    content: 'leshommes'
-                },
-                {
-                    title: 'title',
-                    content: 'leshommes'
-                },
-                {
-                    title: 'title',
-                    content: 'leshommes'
-                }
+                new Todos('one','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
+                new Todos('two','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
+                new Todos('three','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
+                new Todos('four','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
             ]
         }
     }
