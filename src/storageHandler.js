@@ -1,3 +1,4 @@
+
 const storage = (function() {
     
     function addInStorage(project) {
@@ -10,9 +11,15 @@ const storage = (function() {
         return myProject;
     }
 
+    function getLengthProject(title) {
+        let myArray = JSON.parse(localStorage.getItem(title));
+        return myArray.length;
+    }
+
     return {
         addInStorage,
-        getTasksFormStorage
+        getTasksFormStorage,
+        getLengthProject
     }
 })();
 

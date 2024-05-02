@@ -162,11 +162,14 @@ const handlerDom = (function (){
             head.classList.add('head');
 
                 const headTitle = document.createElement('p');
-                headTitle.textContent = `Tasks (0)`;//${storage.getLenght(dataTitle)}
+                headTitle.textContent = `Tasks (${storage.getLengthProject(dataTitle)})`;
 
                 const headBtn = document.createElement('button');
                 headBtn.textContent = '+';
                 headBtn.id = 'add-task-btn';
+                headBtn.addEventListener('click',() => {
+                    handlerDom.addTodosHandler();
+                })
 
                 head.appendChild(headTitle);
                 head.appendChild(headBtn);
