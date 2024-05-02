@@ -84,10 +84,41 @@ header .menu-btn {
     flex-direction: column;
 }
 
+.task {
+    height: 48px;
+    border-radius: 6px;
+    margin:8px 0; 
+}
+
 .task > div {
     display: flex;
     width: 160px;
     gap: 8px;
+    align-items: center;
+    padding: 0 16px;
+}
+
+.task .details-side img {
+    cursor: pointer;
+}
+
+.task .date {
+    color:#22a694
+}
+
+.task .completed {
+    background-color: blueviolet;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width:16px;
+    height:16px;
+    border-radius: 50%;
+}
+
+.task .completed , 
+.task .title {
+    cursor: pointer;
 }
 
 /* menu bar style */
@@ -129,5 +160,4 @@ header .menu-btn {
 .menu .head {
     padding: 16px;
 }
-
 

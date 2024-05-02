@@ -1,4 +1,3 @@
-import { functions } from "lodash";
 
 const tasks = (function() {
     class Todos {
