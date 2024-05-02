@@ -2,15 +2,13 @@ import { compareAsc, format } from "date-fns";
 import './style.css';
 import { tasks } from './task.js';
 import { handlerDom } from "./handlerDom.js";
+import { storage } from "./storageHandler.js";
 
+handlerDom.updateDisplay();
 
-const addTodosBtn = document.querySelector('#add-task-btn');
-addTodosBtn.onclick = () => { handlerDom.addTodosHandler() }
+const addProjectBtn = document.querySelector('#add-project-btn');
+addProjectBtn.addEventListener('click', () => { handlerDom.addProjectHandler() });
 
-const addProjectbtn = document.querySelector('#add-project-btn');
-addProjectbtn.onclick = () => { handlerDom.addProjectHandler() }
-
-handlerDom.showTasks('myProject');
 
 
 

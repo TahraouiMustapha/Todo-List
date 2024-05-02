@@ -3,6 +3,7 @@ import { storage } from "./storageHandler.js";
 import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
+import { create } from "lodash";
 
 
 const handlerDom = (function (){
@@ -150,6 +151,7 @@ const handlerDom = (function (){
 
     function showProject(dataTitle) {
         const main = document.querySelector('.main');
+        main.innerHTML = '';
 
         const projectTitle = document.createElement('h2');
         projectTitle.classList.add('project-title');
@@ -195,11 +197,34 @@ const handlerDom = (function (){
         return myDiv;
     }
 
+    function updateDisplay() {
+        updateMenuDisplay();
+        updateMainDisplay();
+    }
+
+    function updateMenuDisplay() {
+        const projectContainer = document.querySelector('.bottom-side .projects-container');
+        const arrayTitles = storage.getAllProjectTitles();
+
+        arrayTitles.forEach((title) => {
+            projectContainer.appendChild(createProjectBtn(title));
+        })
+    }
+
+    function updateMainDisplay() {
+        let firstTitle;
+        if(!storage.isEmpty()) {
+            firstTitle = localStorage.key(0);
+            handlerDom.showProject(firstTitle);
+        }
+    }
+
     return {
         addTodosHandler,
         addProjectHandler,
         showProject,
-        showTasks
+        showTasks,
+        updateDisplay
     }
 })()
 
