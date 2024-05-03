@@ -3,7 +3,6 @@ import { storage } from "./storageHandler.js";
 import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
-import { create } from "lodash";
 
 
 const handlerDom = (function (){
@@ -63,7 +62,7 @@ const handlerDom = (function (){
         return myTask;
     }
 
-    function addTodosHandler(){
+    function addTodosHandler(dataTitle){
         const dialog = document.createElement('dialog');
         const myForm = document.createElement('myform');
 
@@ -98,7 +97,14 @@ const handlerDom = (function (){
                             desc.value,
                         dueDate.value,
                         priority.value);
-                        
+            
+            //get Project Array;
+            let myArray = storage.getTasksFormStorage(dataTitle);
+            //push the task
+            myArray.push(task);
+            //push project in localStorage
+            let newProject = tasks.createProject(dataTitle, myArray);
+            storage.addInStorage(newProject);
         })
 
         myForm.appendChild(title);
@@ -131,7 +137,7 @@ const handlerDom = (function (){
             event.preventDefault();
             let newProject ;
             if(inputTitle.value != ''){
-                newProject = tasks.createProject(inputTitle.value.toString());
+                newProject = tasks.createProject(inputTitle.value.toString(), []);
                 //2.create btn with data-title 
                 projectContainer.appendChild(createProjectBtn(newProject.title));
                 //3.add in local Storage
@@ -170,7 +176,7 @@ const handlerDom = (function (){
                 headBtn.textContent = '+';
                 headBtn.id = 'add-task-btn';
                 headBtn.addEventListener('click',() => {
-                    handlerDom.addTodosHandler();
+                    handlerDom.addTodosHandler(dataTitle);
                 })
 
                 head.appendChild(headTitle);

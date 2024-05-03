@@ -12,14 +12,9 @@ const tasks = (function() {
     }
 
     class Project {
-        constructor(title) {
+        constructor(title, array) {
             this.title = title
-            this.array = [
-                new Todos('one','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
-                new Todos('two','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
-                new Todos('three','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
-                new Todos('four','hihi ji',format(new Date(2024, 2, 11), "yyyy-MM-dd"), 'first'),
-            ]
+            this.array = array
         }
     }
 
@@ -27,8 +22,8 @@ const tasks = (function() {
         return new Todos(title, desc, dueDate, priority);
     }
 
-    function createProject(title){
-        return new Project(title);
+    function createProject(title, array){
+        return new Project(title, array);
     }
 
     return {
