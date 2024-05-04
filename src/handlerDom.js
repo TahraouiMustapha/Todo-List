@@ -5,6 +5,47 @@ import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
 
 
+const update = (function() {
+    
+    function mainUpdate() {
+        let firstTitle;
+        if(!storage.isEmpty()) {
+            firstTitle = localStorage.key(0);
+            handlerDom.showProject(firstTitle);
+        }
+    }
+
+    function menuUpdate() {
+        const projectContainer = document.querySelector('.bottom-side .projects-container');
+        const arrayTitles = storage.getAllProjectTitles();
+
+        arrayTitles.forEach((title) => {
+            projectContainer.appendChild(handlerDom.createProjectBtn(title));
+        })
+    }
+
+
+    function tasksContainerUpdate(dataTitle) {
+        let tasksContainer = document.querySelector('.tasks');
+        tasksContainer.remove();
+        const projectTasks = document.querySelector('.project-tasks');
+        const newTasksContainer = handlerDom.showTasks(dataTitle);
+
+        newTasksContainer.classList.add('tasks');
+        projectTasks.appendChild(newTasksContainer);
+
+        const head = document.querySelector('.head p');
+        head.textContent = `Tasks (${storage.getLengthProject(dataTitle)})`;
+    }
+
+
+    return {
+        mainUpdate,
+        menuUpdate,
+        tasksContainerUpdate
+    };
+})();
+
 const handlerDom = (function (){
 
     function createProjectBtn(dataTitle) {
@@ -105,6 +146,9 @@ const handlerDom = (function (){
             //push project in localStorage
             let newProject = tasks.createProject(dataTitle, myArray);
             storage.addInStorage(newProject);
+            
+            update.tasksContainerUpdate(dataTitle);
+            
         })
 
         myForm.appendChild(title);
@@ -182,11 +226,11 @@ const handlerDom = (function (){
                 head.appendChild(headTitle);
                 head.appendChild(headBtn);
             //show Tasks of project:
-            const tasks = showTasks(dataTitle);
-            tasks.classList.add('tasks');
+            const tasksContainer = showTasks(dataTitle);
+            tasksContainer.classList.add('tasks');
                 
             projectTasks.appendChild(head);
-            projectTasks.appendChild(tasks);
+            projectTasks.appendChild(tasksContainer);
 
 
         main.appendChild(projectTitle);
@@ -204,25 +248,8 @@ const handlerDom = (function (){
     }
 
     function updateDisplay() {
-        updateMenuDisplay();
-        updateMainDisplay();
-    }
-
-    function updateMenuDisplay() {
-        const projectContainer = document.querySelector('.bottom-side .projects-container');
-        const arrayTitles = storage.getAllProjectTitles();
-
-        arrayTitles.forEach((title) => {
-            projectContainer.appendChild(createProjectBtn(title));
-        })
-    }
-
-    function updateMainDisplay() {
-        let firstTitle;
-        if(!storage.isEmpty()) {
-            firstTitle = localStorage.key(0);
-            handlerDom.showProject(firstTitle);
-        }
+        update.menuUpdate();
+        update.mainUpdate();
     }
 
     return {
@@ -230,6 +257,7 @@ const handlerDom = (function (){
         addProjectHandler,
         showProject,
         showTasks,
+        createProjectBtn,
         updateDisplay
     }
 })()
