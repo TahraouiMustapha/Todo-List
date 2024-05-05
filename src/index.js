@@ -9,6 +9,9 @@ handlerDom.updateDisplay();
 const addProjectBtn = document.querySelector('#add-project-btn');
 addProjectBtn.addEventListener('click', () => { handlerDom.addProjectHandler() });
 
-
+let newTask = tasks.createTodos('title','desc', '2009-11-02', 'important');
+console.log(newTask.isCompleted);
+newTask.isCompleted = true;
+console.log(newTask.isCompleted);
 
 

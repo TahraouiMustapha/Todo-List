@@ -120,8 +120,7 @@ header .menu-btn {
     border-radius: 50%;
 }
 
-.task .completed , 
-.task .title {
+.task .myDiv1 {
     cursor: pointer;
 }
 

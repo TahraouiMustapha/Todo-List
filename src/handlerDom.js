@@ -65,6 +65,7 @@ const handlerDom = (function (){
         myTask.classList.add('task');
         
             const myDiv1 = document.createElement('div');
+            myDiv1.classList.add('myDiv1');
                 const completed = document.createElement('div');
                 completed.classList.add('completed');
                 //rest the priority

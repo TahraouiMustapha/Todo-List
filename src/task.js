@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 
 const tasks = (function() {
     class Todos {
@@ -7,7 +6,15 @@ const tasks = (function() {
             this.desc = desc
             this.dueDate = dueDate
             this.priority = priority
-            this.completed = false
+            this._completed = false
+        }
+
+        get isCompleted() {
+            return this._completed
+        }
+
+        set isCompleted(value) {
+            this._completed = value 
         }
     }
 
