@@ -2,6 +2,7 @@
 const tasks = (function() {
     class Todos {
         constructor(title, desc, dueDate, priority) {
+            this.index = 0
             this.title = title
             this.desc = desc
             this.dueDate = dueDate
@@ -15,6 +16,10 @@ const tasks = (function() {
 
         set isCompleted(value) {
             this._completed = value 
+        }
+
+        changeIndex(newIndex){
+            this.index = newIndex;
         }
     }
 

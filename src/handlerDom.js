@@ -239,9 +239,11 @@ const handlerDom = (function (){
     }
 
     function showTasks(dataTitle) {
+        let i = 0;
         const myDiv = document.createElement('div');
         const myArray = storage.getTasksFormStorage(dataTitle);
         myArray.forEach((task) => {
+            task.changeIndex(i++);
             myDiv.appendChild(createTaskDiv(task));
         })
 
