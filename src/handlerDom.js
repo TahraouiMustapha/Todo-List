@@ -60,20 +60,34 @@ const handlerDom = (function (){
         return btn;
     }
 
-    function createTaskDiv(taskObj) {
+    function createTaskDiv(taskObj, projectTitle) {
         const myTask = document.createElement('div');
         myTask.classList.add('task');
         
             const myDiv1 = document.createElement('div');
             myDiv1.classList.add('myDiv1');
+            myDiv1.dataset.index = taskObj.index;
                 const completed = document.createElement('div');
                 completed.classList.add('completed');
-                //rest the priority
-                //rest the completed func
 
                 const taskTitle = document.createElement('p');
                 taskTitle.classList.add('title');
                 taskTitle.textContent = taskObj.title;
+
+                myDiv1.addEventListener('click', (e) => {
+                    let index = e.target.dataset.index;
+                    let taskStorage = storage.getTask(projectTitle, index);
+                    //to toggle or setting todos as complete
+                    tasks.toggleCompleted(taskStorage);
+                    //get Project array
+                    let myArray = storage.getTasksFormStorage(projectTitle);
+                    //push the task in specific index
+                    taskStorage.index = index;
+                    myArray.splice(index, 1, taskStorage);
+                    //push the actaul project in localStorage
+                    let project = tasks.createProject(projectTitle, myArray);
+                    storage.addInStorage(project);
+                })
             
                 myDiv1.appendChild(completed);
                 myDiv1.appendChild(taskTitle);
@@ -243,8 +257,9 @@ const handlerDom = (function (){
         const myDiv = document.createElement('div');
         const myArray = storage.getTasksFormStorage(dataTitle);
         myArray.forEach((task) => {
-            task.changeIndex(i++);
-            myDiv.appendChild(createTaskDiv(task));
+            task.index = i++;
+            //add project title to get the task from localStorage
+            myDiv.appendChild(createTaskDiv(task, dataTitle));
         })
 
         return myDiv;

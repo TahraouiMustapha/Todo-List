@@ -7,20 +7,9 @@ const tasks = (function() {
             this.desc = desc
             this.dueDate = dueDate
             this.priority = priority
-            this._completed = false
+            this.completed = false
         }
 
-        get isCompleted() {
-            return this._completed
-        }
-
-        set isCompleted(value) {
-            this._completed = value 
-        }
-
-        changeIndex(newIndex){
-            this.index = newIndex;
-        }
     }
 
     class Project {
@@ -38,9 +27,19 @@ const tasks = (function() {
         return new Project(title, array);
     }
 
+    function toggleCompleted(taskObj) {
+        if (taskObj.completed ) {
+            taskObj.completed = false
+        } else {
+            taskObj.completed = true
+        }
+    }
+
     return {
+        Todos,
         createTodos,
-        createProject
+        createProject,
+        toggleCompleted
     }
     
 })();
