@@ -75,17 +75,14 @@ const handlerDom = (function (){
                 taskTitle.textContent = taskObj.title;
 
                 myDiv1.addEventListener('click', (e) => {
-                    let index = e.target.dataset.index;
-                    let taskStorage = storage.getTask(projectTitle, index);
+                    let index = Number(e.target.dataset.index);
+
                     //to toggle or setting todos as complete
-                    tasks.toggleCompleted(taskStorage);
-                    //get Project array
-                    let myArray = storage.getTasksFormStorage(projectTitle);
-                    //push the task in specific index
-                    taskStorage.index = index;
-                    myArray.splice(index, 1, taskStorage);
+                    let tasksStorage = storage.getTasksFormStorage(projectTitle);
+                    tasksStorage[index].completed = !tasksStorage[index].completed;
+        
                     //push the actaul project in localStorage
-                    let project = tasks.createProject(projectTitle, myArray);
+                    let project = tasks.createProject(projectTitle, tasksStorage);
                     storage.addInStorage(project);
                 })
             

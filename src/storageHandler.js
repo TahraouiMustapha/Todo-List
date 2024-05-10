@@ -11,11 +11,6 @@ const storage = (function() {
         return myProject;
     }
 
-    function getTask(projectTitle, index) {
-        const myProject = JSON.parse(localStorage.getItem(projectTitle));
-        return myProject[index];
-    }
-
     function getAllProjectTitles() {
         let arrayTitles = [];
         for (let i=0; i < localStorage.length; i++) {
@@ -37,7 +32,6 @@ const storage = (function() {
     return {
         addInStorage,
         getTasksFormStorage,
-        getTask,
         getLengthProject,
         getAllProjectTitles,
         isEmpty 
