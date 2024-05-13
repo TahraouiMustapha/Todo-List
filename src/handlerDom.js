@@ -38,11 +38,17 @@ const update = (function() {
         head.textContent = `Tasks (${storage.getLengthProject(dataTitle)})`;
     }
 
+    function updateTasks(dataTitle) {
+        let tasksContainer = document.querySelector('.tasks');
+        tasksContainer = handlerDom.showTasks(dataTitle);
+    }
+
 
     return {
         mainUpdate,
         menuUpdate,
-        tasksContainerUpdate
+        updateTasks,
+        tasksContainerUpdate,
     };
 })();
 
@@ -75,15 +81,8 @@ const handlerDom = (function (){
                 taskTitle.textContent = taskObj.title;
 
                 myDiv1.addEventListener('click', (e) => {
-                    let index = Number(e.target.dataset.index);
-
-                    //to toggle or setting todos as complete
-                    let tasksStorage = storage.getTasksFormStorage(projectTitle);
-                    tasksStorage[index].completed = !tasksStorage[index].completed;
-        
-                    //push the actaul project in localStorage
-                    let project = tasks.createProject(projectTitle, tasksStorage);
-                    storage.addInStorage(project);
+                    let index = Number(e.currentTarget.dataset.index);
+                    handleTaskClick(index, projectTitle);
                 })
             
                 myDiv1.appendChild(completed);
@@ -267,12 +266,26 @@ const handlerDom = (function (){
         update.mainUpdate();
     }
 
+    //to handle task click
+    function handleTaskClick(index, projectTitle) {
+        //to toggle or setting todos as complete
+        let tasksStorage = storage.getTasksFormStorage(projectTitle);
+        tasksStorage[index].completed = !tasksStorage[index].completed;
+
+        //push the actaul project in localStorage
+        let project = tasks.createProject(projectTitle, tasksStorage);
+        storage.addInStorage(project);
+
+        update.updateTasks(projectTitle);
+    }
+
     return {
         addTodosHandler,
         addProjectHandler,
         showProject,
         showTasks,
         createProjectBtn,
+        createTaskDiv,
         updateDisplay
     }
 })()
