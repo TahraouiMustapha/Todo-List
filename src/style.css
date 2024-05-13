@@ -110,7 +110,7 @@ header .menu-btn {
     color:#22a694
 }
 
-.task .completed {
+.task .circle {
     background-color: blueviolet;
     background-position: center;
     background-repeat: no-repeat;

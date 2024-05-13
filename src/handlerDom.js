@@ -3,6 +3,7 @@ import { storage } from "./storageHandler.js";
 import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
+import myDoneImage from './img/done.svg';
 
 
 const update = (function() {
@@ -38,16 +39,19 @@ const update = (function() {
         head.textContent = `Tasks (${storage.getLengthProject(dataTitle)})`;
     }
 
-    function updateTasks(dataTitle) {
-        let tasksContainer = document.querySelector('.tasks');
-        tasksContainer = handlerDom.showTasks(dataTitle);
+    function toggleDoneImage(myDiv, isCompleted) {
+        isCompleted ? myDiv.style.backgroundImage = `url(${myDoneImage})`: myDiv.style.backgroundImage = 'none'; 
     }
 
+    function toggleTitleTask(myTitle, isCompleted) {
+        isCompleted ? myTitle.style.textDecoration = 'line-through': myTitle.style.textDecoration = 'none';
+    }
 
     return {
         mainUpdate,
         menuUpdate,
-        updateTasks,
+        toggleDoneImage,
+        toggleTitleTask,
         tasksContainerUpdate,
     };
 })();
@@ -74,15 +78,20 @@ const handlerDom = (function (){
             myDiv1.classList.add('myDiv1');
             myDiv1.dataset.index = taskObj.index;
                 const completed = document.createElement('div');
-                completed.classList.add('completed');
+                completed.classList.add('circle');
 
                 const taskTitle = document.createElement('p');
                 taskTitle.classList.add('title');
                 taskTitle.textContent = taskObj.title;
+                
 
                 myDiv1.addEventListener('click', (e) => {
                     let index = Number(e.currentTarget.dataset.index);
-                    handleTaskClick(index, projectTitle);
+                    let myCompletedVar = handleTaskClick(index, projectTitle);
+
+                    // update Task Dom
+                    update.toggleTitleTask(taskTitle, myCompletedVar);
+                    update.toggleDoneImage(completed, myCompletedVar);
                 })
             
                 myDiv1.appendChild(completed);
@@ -272,11 +281,12 @@ const handlerDom = (function (){
         let tasksStorage = storage.getTasksFormStorage(projectTitle);
         tasksStorage[index].completed = !tasksStorage[index].completed;
 
+        const myTask = tasksStorage[index].completed;
         //push the actaul project in localStorage
         let project = tasks.createProject(projectTitle, tasksStorage);
         storage.addInStorage(project);
 
-        update.updateTasks(projectTitle);
+        return myTask;
     }
 
     return {
