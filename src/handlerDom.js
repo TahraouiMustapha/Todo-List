@@ -1,5 +1,6 @@
 import { tasks } from "./task.js";
 import { storage } from "./storageHandler.js";
+import { dialogFactory } from "./dialogModule.js";
 import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
@@ -268,7 +269,8 @@ const handlerDom = (function (){
                 headBtn.textContent = '+';
                 headBtn.id = 'add-task-btn';
                 headBtn.addEventListener('click',() => {
-                    handlerDom.addTodosHandler(dataTitle);
+                    // handlerDom.addTodosHandler(dataTitle);
+                    dialogFactory.addTask(dataTitle).showModal();
                 })
 
                 head.appendChild(headTitle);

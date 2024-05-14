@@ -241,3 +241,7 @@ dialog textarea{
     padding:5px 12px;
     resize: none;
 }
+
+dialog select {
+    height: 32px;
+}
