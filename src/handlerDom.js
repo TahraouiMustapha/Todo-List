@@ -47,11 +47,24 @@ const update = (function() {
         isCompleted ? myTitle.style.textDecoration = 'line-through': myTitle.style.textDecoration = 'none';
     }
 
+    function priorityColor(priority) {
+        switch(priority) {
+            case 'important':
+                return 'red';
+            case 'little':
+                return 'orange';
+            case 'not':
+                return 'yellow';
+
+        }
+    }
+
     return {
         mainUpdate,
         menuUpdate,
         toggleDoneImage,
         toggleTitleTask,
+        priorityColor,
         tasksContainerUpdate,
     };
 })();
@@ -79,6 +92,7 @@ const handlerDom = (function (){
             myDiv1.dataset.index = taskObj.index;
                 const completed = document.createElement('div');
                 completed.classList.add('circle');
+                completed.style.backgroundColor = update.priorityColor(taskObj.priority);
 
                 const taskTitle = document.createElement('p');
                 taskTitle.classList.add('title');
@@ -139,11 +153,11 @@ const handlerDom = (function (){
             important.value = 'important';
             important.text = 'important';
             const normal = document.createElement('option');
-            normal.value = 'normal';
-            normal.text = 'normal';
+            normal.value = 'little';
+            normal.text = 'little bit';
             const not = document.createElement('option');
             not.value = 'not';    
-            not.text = 'not really';
+            not.text = 'not important';
 
             priority.appendChild(important);
             priority.appendChild(normal);
