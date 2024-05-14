@@ -140,6 +140,19 @@ const handlerDom = (function (){
     function addTodosHandler(dataTitle){
         const dialog = document.createElement('dialog');
         const myForm = document.createElement('myform');
+        //header
+        const head = document.createElement('div');
+        head.classList.add('dialogHead');
+
+            const headTitle = document.createElement('h2');
+            headTitle.textContent = 'Add new task';
+            const closeX = document.createElement('div');
+            closeX.textContent = 'x';
+            closeX.classList.add('closeX');
+
+            head.appendChild(headTitle);
+            head.appendChild(closeX);
+
 
         const title = document.createElement('input'); 
         title.type = 'text';
@@ -185,6 +198,7 @@ const handlerDom = (function (){
             
         })
 
+        myForm.appendChild(head);
         myForm.appendChild(title);
         myForm.appendChild(desc);
         myForm.appendChild(dueDate);
@@ -196,7 +210,7 @@ const handlerDom = (function (){
         myForm.method = 'dialog';
         dialog.appendChild(myForm);
         document.body.appendChild(dialog); 
-        dialog.show();
+        dialog.showModal();
     }
 
     function addProjectHandler() {
@@ -230,7 +244,7 @@ const handlerDom = (function (){
 
         myDialog.appendChild(myForm);
         document.body.appendChild(myDialog);
-        myDialog.show();
+        myDialog.showModal();
     }
 
     function showProject(dataTitle) {

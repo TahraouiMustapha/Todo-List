@@ -162,4 +162,82 @@ header .menu-btn {
 .menu .head {
     padding: 16px;
 }
+/* for dialog style */
+dialog[open] {
+    border:none;
+    width:340px;
+    min-height:50vh;
+    justify-self: center;
+    align-self: center;
+}
 
+dialog .dialogHead {
+    background-color: #22a694;
+    color: #fff;
+    height:56px;
+    display: flex;
+    justify-content: space-between;
+    padding:8px 24px;
+    margin: 1px;
+}
+
+.dialogHead h2 {
+    align-self: center;
+}
+
+.dialogHead .closeX {
+    background-color: #cbd5e1;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color:#157d6f;
+    cursor: pointer;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+dialog .inputs {
+    padding:12px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    margin:12px 8px;
+    padding-bottom: 24px;
+    width:80%;
+    border-bottom: 1px solid #000;
+}
+
+.inputs input {
+    min-height:28px;
+    padding: 0 12px;
+}
+
+.inputs > div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+dialog .dialogBtns {
+    padding: 12px 24px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
+.dialogBtns button {
+    padding: 8px 16px;
+    border:1px solid #22a694;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+dialog textarea{
+    padding:5px 12px;
+    resize: none;
+}

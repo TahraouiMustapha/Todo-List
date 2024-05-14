@@ -11,7 +11,8 @@ addProjectBtn.addEventListener('click', () => { handlerDom.addProjectHandler() }
 
 let newTask = tasks.createTodos('title','desc', '2009-11-02', 'important');
 
-
+let d = document.querySelector('dialog');
+d.showModal();
 
 
 
