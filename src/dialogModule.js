@@ -108,8 +108,6 @@ const dialogFactory = (function() {
         return myDiv; 
     }
 
-
-
     function addTask(dataTitle) {
         const myDialog = document.createElement('dialog');
         const myForm = document.createElement('form');
@@ -134,7 +132,14 @@ const dialogFactory = (function() {
                 //hadi hya
                 eventHandlers.handleAddNewTask(dataTitle);
             })
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.type = 'button';
+
+            cancelBtn.addEventListener('click', eventHandlers.closeDialog );
                
+            dialogBtns.appendChild(cancelBtn);
             dialogBtns.appendChild(btn);
 
 
@@ -148,8 +153,43 @@ const dialogFactory = (function() {
 
     }
 
+    function createProjectDialog() {
+        const myDialog = document.createElement('dialog');
+        const myForm = document.createElement('form');
+
+           //create inputs div:
+            const inputsDiv = document.createElement('div');
+            inputsDiv.classList.add('inputs');
+                inputsDiv.appendChild(createTitleInput(''));
+            //create div for btns
+            const dialogBtns = document.createElement('div');
+            dialogBtns.classList.add('dialogBtns');
+                const addBtn = document.createElement('button');
+                addBtn.textContent = 'Add';
+                addBtn.type = 'submit';
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.type = 'button';
+
+                cancelBtn.addEventListener('click', eventHandlers.closeDialog );
+
+            dialogBtns.appendChild(cancelBtn);
+            dialogBtns.appendChild(addBtn);
+
+
+        myForm.appendChild(createHeadTitle('Add New Project'));
+        myForm.appendChild(inputsDiv);
+        myForm.appendChild(dialogBtns);
+
+        myDialog.appendChild(myForm);
+        document.body.appendChild(myDialog);
+        myDialog.showModal();
+    }
+
     return {
-        addTask
+        addTask,
+        createProjectDialog
     }
 
 })(); 

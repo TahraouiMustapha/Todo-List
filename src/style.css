@@ -167,7 +167,7 @@ header .menu-btn {
 dialog[open] {
     border:none;
     width:340px;
-    min-height:50vh;
+    height:auto;
     justify-self: center;
     align-self: center;
 }

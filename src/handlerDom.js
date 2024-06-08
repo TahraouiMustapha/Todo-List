@@ -138,38 +138,39 @@ const handlerDom = (function (){
         return myTask;
     }
 
-    function addProjectHandler() {
+    function addProject() {
         const projectContainer = document.querySelector('.bottom-side .projects-container');
-        const myDialog = document.createElement('dialog');
-        const myForm = document.createElement('form');
+        dialogFactory.createProjectDialog();
+        // const myDialog = document.createElement('dialog');
+        // const myForm = document.createElement('form');
 
-        const inputTitle = document.createElement('input');
-        inputTitle.classList.add('new-project-title');
-        inputTitle.required = true;
+        // const inputTitle = document.createElement('input');
+        // inputTitle.classList.add('new-project-title');
+        // inputTitle.required = true;
         
-        const btn = document.createElement('button');
-        btn.textContent = 'Add';
-        btn.type = 'submit';
-        btn.addEventListener('click', (event) => {
-            event.preventDefault();
-            let newProject ;
-            if(inputTitle.value != ''){
-                newProject = tasks.createProject(inputTitle.value.toString(), []);
-                //2.create btn with data-title 
-                projectContainer.appendChild(createProjectBtn(newProject.title));
-                //3.add in local Storage
-                storage.addInStorage(newProject);
-            } 
+        // const btn = document.createElement('button');
+        // btn.textContent = 'Add';
+        // btn.type = 'submit';
+        // btn.addEventListener('click', (event) => {
+        //     event.preventDefault();
+        //     let newProject ;
+        //     if(inputTitle.value != ''){
+        //         newProject = tasks.createProject(inputTitle.value.toString(), []);
+        //         //2.create btn with data-title 
+        //         projectContainer.appendChild(createProjectBtn(newProject.title));
+        //         //3.add in local Storage
+        //         storage.addInStorage(newProject);
+        //     } 
             
-        })
+        // })
 
 
-        myForm.appendChild(inputTitle);
-        myForm.appendChild(btn);
+        // myForm.appendChild(inputTitle);
+        // myForm.appendChild(btn);
 
-        myDialog.appendChild(myForm);
-        document.body.appendChild(myDialog);
-        myDialog.showModal();
+        // myDialog.appendChild(myForm);
+        // document.body.appendChild(myDialog);
+        // myDialog.showModal();
     }
 
     function showProject(dataTitle) {
@@ -243,7 +244,7 @@ const handlerDom = (function (){
     }
 
     return {
-        addProjectHandler,
+        addProject,
         showProject,
         showTasks,
         createProjectBtn,
@@ -270,6 +271,8 @@ const eventHandlers = (function() {
         
         update.tasksContainerUpdate(dataTitle);
     }
+
+    
 
     function closeDialog() {
         const dialog = document.querySelector('dialog[open]');
