@@ -1,27 +1,5 @@
-import { tasks } from "./task.js";
 import { format } from "date-fns";
-import { storage } from "./storageHandler.js";
-import { update } from "./handlerDom.js";
-
-//the problem when i call this func that it resposible for 
-//handle add new task click (raha tjib title input bsah mahoch yjib value)
-function handleAddNewTask(dataTitle) {
-    let title = document.querySelector('dialog[open] #title').value;
-    let desc = document.querySelector('dialog[open] #desc').value;
-    let dueDate = document.querySelector('dialog[open] #dueDate').value;
-    let priority = document.querySelector('dialog[open] #priority').value;
-
-    let newTodos = tasks.createTodos(title, desc, dueDate, priority);
-    //get Project Array;
-    let myArray = storage.getTasksFormStorage(dataTitle);
-    //push the task
-    myArray.push(newTodos);
-    //push project in localStorage
-    let newProject = tasks.createProject(dataTitle, myArray);
-    storage.addInStorage(newProject);
-    
-    update.tasksContainerUpdate(dataTitle);
-}
+import { eventHandlers } from "./handlerDom.js";
 
 
 const dialogFactory = (function() {
@@ -153,7 +131,7 @@ const dialogFactory = (function() {
             btn.addEventListener('click', (event) => {
                 event.preventDefault();
                 //hadi hya
-                handleAddNewTask(dataTitle);
+                eventHandlers.handleAddNewTask(dataTitle);
             })
                
             dialogBtns.appendChild(btn);

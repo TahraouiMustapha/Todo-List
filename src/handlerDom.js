@@ -138,82 +138,6 @@ const handlerDom = (function (){
         return myTask;
     }
 
-    function addTodosHandler(dataTitle){
-        const dialog = document.createElement('dialog');
-        const myForm = document.createElement('myform');
-        //header
-        const head = document.createElement('div');
-        head.classList.add('dialogHead');
-
-            const headTitle = document.createElement('h2');
-            headTitle.textContent = 'Add new task';
-            const closeX = document.createElement('div');
-            closeX.textContent = 'x';
-            closeX.classList.add('closeX');
-
-            head.appendChild(headTitle);
-            head.appendChild(closeX);
-
-
-        const title = document.createElement('input'); 
-        title.type = 'text';
-        const desc = document.createElement('input');
-        desc.type = 'text';
-        const dueDate = document.createElement('input');
-        dueDate.type = 'date' 
-
-        const priority = document.createElement('select');
-            const important = document.createElement('option');
-            important.value = 'important';
-            important.text = 'important';
-            const normal = document.createElement('option');
-            normal.value = 'little';
-            normal.text = 'little bit';
-            const not = document.createElement('option');
-            not.value = 'not';    
-            not.text = 'not important';
-
-            priority.appendChild(important);
-            priority.appendChild(normal);
-            priority.appendChild(not);
-
-        const btn = document.createElement('button');
-        btn.textContent = 'add task';
-        btn.type = 'submit';
-        btn.addEventListener('click', (event) => {
-            event.preventDefault();
-            const task = tasks.createTodos(title.value,
-                            desc.value,
-                        dueDate.value,
-                        priority.value);
-            
-            //get Project Array;
-            let myArray = storage.getTasksFormStorage(dataTitle);
-            //push the task
-            myArray.push(task);
-            //push project in localStorage
-            let newProject = tasks.createProject(dataTitle, myArray);
-            storage.addInStorage(newProject);
-            
-            update.tasksContainerUpdate(dataTitle);
-            
-        })
-
-        myForm.appendChild(head);
-        myForm.appendChild(title);
-        myForm.appendChild(desc);
-        myForm.appendChild(dueDate);
-        myForm.appendChild(priority);
-        myForm.appendChild(btn);
-
-
-
-        myForm.method = 'dialog';
-        dialog.appendChild(myForm);
-        document.body.appendChild(dialog); 
-        dialog.showModal();
-    }
-
     function addProjectHandler() {
         const projectContainer = document.querySelector('.bottom-side .projects-container');
         const myDialog = document.createElement('dialog');
@@ -269,7 +193,6 @@ const handlerDom = (function (){
                 headBtn.textContent = '+';
                 headBtn.id = 'add-task-btn';
                 headBtn.addEventListener('click',() => {
-                    // handlerDom.addTodosHandler(dataTitle);
                     dialogFactory.addTask(dataTitle);
                 })
 
@@ -320,7 +243,6 @@ const handlerDom = (function (){
     }
 
     return {
-        addTodosHandler,
         addProjectHandler,
         showProject,
         showTasks,
@@ -330,4 +252,29 @@ const handlerDom = (function (){
     }
 })()
 
-export { handlerDom, update };
+const eventHandlers = (function() {
+    function handleAddNewTask(dataTitle) {
+        let title = document.querySelector('dialog[open] #title').value;
+        let desc = document.querySelector('dialog[open] #desc').value;
+        let dueDate = document.querySelector('dialog[open] #dueDate').value;
+        let priority = document.querySelector('dialog[open] #priority').value;
+    
+        let newTodos = tasks.createTodos(title, desc, dueDate, priority);
+        //get Project Array;
+        let myArray = storage.getTasksFormStorage(dataTitle);
+        //push the task
+        myArray.push(newTodos);
+        //push project in localStorage
+        let newProject = tasks.createProject(dataTitle, myArray);
+        storage.addInStorage(newProject);
+        
+        update.tasksContainerUpdate(dataTitle);
+    }
+
+    return {
+        handleAddNewTask
+    }
+
+})()
+
+export { handlerDom, eventHandlers };
