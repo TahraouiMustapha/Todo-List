@@ -271,8 +271,14 @@ const eventHandlers = (function() {
         update.tasksContainerUpdate(dataTitle);
     }
 
+    function closeDialog() {
+        const dialog = document.querySelector('dialog[open]');
+        dialog.close();
+    }
+
     return {
-        handleAddNewTask
+        handleAddNewTask,
+        closeDialog
     }
 
 })()

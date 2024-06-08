@@ -1,6 +1,7 @@
 * {
     margin:0;
     padding:0;
+    font-family: sans-serif;
 }
 
 body {
@@ -191,6 +192,8 @@ dialog .dialogHead {
     height: 24px;
     border-radius: 50%;
     color:#157d6f;
+    font-size: 16px;
+    font-weight: 600;
     cursor: pointer;
     
     display: flex;

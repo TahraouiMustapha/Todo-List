@@ -13,6 +13,7 @@ const dialogFactory = (function() {
             const closeX = document.createElement('div');
             closeX.classList.add('closeX');
             closeX.textContent = 'x';
+            closeX.addEventListener('click', eventHandlers.closeDialog );
 
             dialogHead.appendChild(headTitle);
             dialogHead.appendChild(closeX);
