@@ -1,3 +1,28 @@
+import { tasks } from "./task.js";
+import { format } from "date-fns";
+import { storage } from "./storageHandler.js";
+import { update } from "./handlerDom.js";
+
+//the problem when i call this func that it resposible for 
+//handle add new task click (raha tjib title input bsah mahoch yjib value)
+function handleAddNewTask(dataTitle) {
+    let title = document.querySelector('dialog[open] #title').value;
+    let desc = document.querySelector('dialog[open] #desc').value;
+    let dueDate = document.querySelector('dialog[open] #dueDate').value;
+    let priority = document.querySelector('dialog[open] #priority').value;
+
+    let newTodos = tasks.createTodos(title, desc, dueDate, priority);
+    //get Project Array;
+    let myArray = storage.getTasksFormStorage(dataTitle);
+    //push the task
+    myArray.push(newTodos);
+    //push project in localStorage
+    let newProject = tasks.createProject(dataTitle, myArray);
+    storage.addInStorage(newProject);
+    
+    update.tasksContainerUpdate(dataTitle);
+}
+
 
 const dialogFactory = (function() {
     function createHeadTitle(dialogKind) {
@@ -64,6 +89,9 @@ const dialogFactory = (function() {
             //to fill the input 
             myInput.value = date;
             myInput.setAttribute('id', 'dueDate');
+
+            let currentDay = format(new Date(), "yyyy-MM-dd");
+            myInput.setAttribute('min', currentDay);
             
             myDiv.appendChild(myLabel);
             myDiv.appendChild(myInput);
@@ -101,10 +129,11 @@ const dialogFactory = (function() {
         return myDiv; 
     }
 
+
+
     function addTask(dataTitle) {
         const myDialog = document.createElement('dialog');
         const myForm = document.createElement('form');
-
 
         //create inputs div:
         const inputsDiv = document.createElement('div');
@@ -115,12 +144,29 @@ const dialogFactory = (function() {
             inputsDiv.appendChild(createDateInput(''));
             inputsDiv.appendChild(createPrioritySelect(''));
 
+        //create div for btns
+        const dialogBtns = document.createElement('div');
+        dialogBtns.classList.add('dialogBtns');
+            const btn = document.createElement('button');
+            btn.textContent = 'Add';
+            btn.type = 'submit';
+            btn.addEventListener('click', (event) => {
+                event.preventDefault();
+                //hadi hya
+                handleAddNewTask(dataTitle);
+            })
+               
+            dialogBtns.appendChild(btn);
+
+
         myForm.appendChild(createHeadTitle('Add New Task'));
         myForm.appendChild(inputsDiv);
+        myForm.appendChild(dialogBtns);
 
         myDialog.appendChild(myForm);
         document.body.appendChild(myDialog);
-        return myDialog;
+        myDialog.showModal();
+
     }
 
     return {

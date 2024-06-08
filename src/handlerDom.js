@@ -270,7 +270,7 @@ const handlerDom = (function (){
                 headBtn.id = 'add-task-btn';
                 headBtn.addEventListener('click',() => {
                     // handlerDom.addTodosHandler(dataTitle);
-                    dialogFactory.addTask(dataTitle).showModal();
+                    dialogFactory.addTask(dataTitle);
                 })
 
                 head.appendChild(headTitle);
@@ -330,4 +330,4 @@ const handlerDom = (function (){
     }
 })()
 
-export { handlerDom };
+export { handlerDom, update };
