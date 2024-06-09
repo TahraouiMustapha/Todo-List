@@ -234,6 +234,7 @@ const eventHandlers = (function() {
         storage.addInStorage(newProject);
         
         update.tasksContainerUpdate(dataTitle);
+        closeDialog();
     }
 
     function handleAddNewProject() {
