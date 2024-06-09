@@ -243,7 +243,7 @@ const eventHandlers = (function() {
 
         if(titleValue != '') {
             let newProject = tasks.createProject(titleValue, []);
-            projectContainer.appendChild(handlerDom.createProjectBtn(newProject.title));
+            projectContainer.appendChild( handlerDom.createProjectBtn(newProject.title));
             storage.addInStorage(newProject);
         } 
     }
