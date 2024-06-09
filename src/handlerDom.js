@@ -224,17 +224,20 @@ const eventHandlers = (function() {
         let dueDate = document.querySelector('dialog[open] #dueDate').value;
         let priority = document.querySelector('dialog[open] #priority').value;
     
-        let newTodos = tasks.createTodos(title, desc, dueDate, priority);
-        //get Project Array;
-        let myArray = storage.getTasksFormStorage(dataTitle);
-        //push the task
-        myArray.push(newTodos);
-        //push project in localStorage
-        let newProject = tasks.createProject(dataTitle, myArray);
-        storage.addInStorage(newProject);
-        
-        update.tasksContainerUpdate(dataTitle);
-        closeDialog();
+    
+        if(title != '' && dueDate != '') {
+            let newTodos = tasks.createTodos(title, desc, dueDate, priority);
+            //get Project Array;
+            let myArray = storage.getTasksFormStorage(dataTitle);
+            //push the task
+            myArray.push(newTodos);
+            //push project in localStorage
+            let newProject = tasks.createProject(dataTitle, myArray);
+            storage.addInStorage(newProject);
+            
+            update.tasksContainerUpdate(dataTitle);
+            closeDialog();
+        }
     }
 
     function handleAddNewProject() {
@@ -245,6 +248,7 @@ const eventHandlers = (function() {
             let newProject = tasks.createProject(titleValue, []);
             projectContainer.appendChild( handlerDom.createProjectBtn(newProject.title));
             storage.addInStorage(newProject);
+            closeDialog();
         } 
     }
 

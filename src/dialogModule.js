@@ -31,6 +31,7 @@ const dialogFactory = (function() {
             myInput.type = 'text';
             //to fill the input 
             myInput.value = title;
+            myInput.required = true;
             myInput.setAttribute('id', 'title');
             
             myDiv.appendChild(myLabel);
@@ -129,7 +130,6 @@ const dialogFactory = (function() {
             btn.type = 'submit';
             btn.addEventListener('click', (event) => {
                 event.preventDefault();
-                //hadi hya
                 eventHandlers.handleAddNewTask(dataTitle);
             })
 
