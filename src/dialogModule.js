@@ -167,6 +167,10 @@ const dialogFactory = (function() {
                 const addBtn = document.createElement('button');
                 addBtn.textContent = 'Add';
                 addBtn.type = 'submit';
+                addBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    eventHandlers.handleAddNewProject();
+                })
 
                 const cancelBtn = document.createElement('button');
                 cancelBtn.textContent = 'Cancel';
