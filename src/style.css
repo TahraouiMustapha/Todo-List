@@ -249,3 +249,23 @@ dialog textarea{
 dialog select {
     height: 32px;
 }
+
+dialog .textfields-div {
+    padding: 16px;
+    display: grid;
+    grid-template-rows: 48px 80px repeat(2, 48px);
+
+    gap:8px;
+}
+
+.textField {
+    display:  flex;
+    align-items: flex-start;
+    padding: 8px 0px;
+    gap: 48px;
+    border-bottom: solid 0.5px #000;
+}
+
+.textField .infoName {
+    font-weight: 600;
+}

@@ -109,6 +109,22 @@ const dialogFactory = (function() {
         return myDiv; 
     }
 
+    //function to create textfield for information task
+    function createTextField(title, content) {
+        const myDiv = document.createElement('div');
+        myDiv.classList.add('textField');
+            const infoName = document.createElement('p');
+            infoName.classList.add('infoName');
+            infoName.textContent = title;
+
+            const p = document.createElement('p');
+            p.textContent = content;
+
+            myDiv.appendChild(infoName);
+            myDiv.appendChild(p);
+        return myDiv;
+    }
+
     function addTask(dataTitle) {
         const myDialog = document.createElement('dialog');
         const myForm = document.createElement('form');
@@ -192,7 +208,33 @@ const dialogFactory = (function() {
     }
 
     function createInfoDialog(taskObj) {
-        console.log(taskObj)
+        const myDialog = document.createElement('dialog');
+
+            const textFieldsDiv = document.createElement('div');
+            textFieldsDiv.classList.add('textfields-div');
+                textFieldsDiv.appendChild(createTextField('Title :', taskObj.title));
+                textFieldsDiv.appendChild(createTextField('Description :', taskObj.desc));
+                textFieldsDiv.appendChild(createTextField('Due Date :', taskObj.dueDate));
+                textFieldsDiv.appendChild(createTextField('Priority :', taskObj.priority));
+
+
+            const dialogBtns = document.createElement('div');
+            dialogBtns.classList.add('dialogBtns');
+            const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.type = 'button';
+
+                cancelBtn.addEventListener('click', eventHandlers.closeDialog );
+
+                dialogBtns.appendChild(cancelBtn);
+
+
+            myDialog.appendChild(createHeadTitle('Task info'));
+            myDialog.appendChild(textFieldsDiv);
+            myDialog.appendChild(dialogBtns);
+
+        document.body.appendChild(myDialog);
+        myDialog.showModal();
     }
 
     return {
