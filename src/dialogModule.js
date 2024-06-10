@@ -237,10 +237,54 @@ const dialogFactory = (function() {
         myDialog.showModal();
     }
 
+    function createEditDialog(taskObj) {
+        const myDialog = document.createElement('dialog');
+        const myForm = document.createElement('form');
+
+        //create inputs div:
+        const inputsDiv = document.createElement('div');
+        inputsDiv.classList.add('inputs');
+        //create input title, desc ..inside myD inputs div
+            inputsDiv.appendChild(createTitleInput(taskObj.title));
+            inputsDiv.appendChild(createTextArea(taskObj.desc));
+            inputsDiv.appendChild(createDateInput(taskObj.dueDate));
+            inputsDiv.appendChild(createPrioritySelect(taskObj.priority));
+
+        //create div for btns
+        const dialogBtns = document.createElement('div');
+        dialogBtns.classList.add('dialogBtns');
+            const btn = document.createElement('button');
+            btn.textContent = 'Edit';
+            btn.type = 'submit';
+            btn.addEventListener('click', (event) => {
+                event.preventDefault();
+                // eventHandlers.handleAddNewTask(dataTitle);
+            })
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.type = 'button';
+
+            cancelBtn.addEventListener('click', eventHandlers.closeDialog );
+               
+            dialogBtns.appendChild(cancelBtn);
+            dialogBtns.appendChild(btn);
+
+
+        myForm.appendChild(createHeadTitle('Edit Task'));
+        myForm.appendChild(inputsDiv);
+        myForm.appendChild(dialogBtns);
+
+        myDialog.appendChild(myForm);
+        document.body.appendChild(myDialog);
+        myDialog.showModal();
+    }
+
     return {
         addTask,
         createProjectDialog,
-        createInfoDialog
+        createInfoDialog,
+        createEditDialog
     }
 
 })(); 

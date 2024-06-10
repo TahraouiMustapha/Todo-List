@@ -121,6 +121,10 @@ const handlerDom = (function (){
                 const img1 = new Image();
                 img1.src = myEditImage;
                 img1.dataset.index = taskObj.index;
+                img1.addEventListener('click', (event) => {
+                    const index = event.target.dataset.index;
+                    eventHandlers.handleEditTaskClick(index, projectTitle);
+                })
 
                 const img2 = new Image();
                 img2.src = myInfoImage;
@@ -128,7 +132,7 @@ const handlerDom = (function (){
                 img2.addEventListener('click', (event) => {
                     const index = event.target.dataset.index;
                     eventHandlers.handleInfoTaskClick(index, projectTitle); 
-                } )
+                })
 
                 const img3 = new Image();
                 img3.src = myDeleteImage; 
@@ -275,10 +279,19 @@ const eventHandlers = (function() {
 
     function handleRemoveTaskClick(index, projectTitle) {
         const myArray = storage.getTasksFormStorage(projectTitle);
+        //remove the task with the index from our project
         myArray.splice(index, 1);
+        //create a new Project to push it instead of the old one 
         let project = tasks.createProject(projectTitle, myArray);
         storage.addInStorage(project);
-        handlerDom.showProject(projectTitle);
+        //update the display
+        update.tasksContainerUpdate(projectTitle);
+    }
+
+    function handleEditTaskClick(index, projectTitle) {
+        const myArray = storage.getTasksFormStorage(projectTitle);
+        const taskObj = myArray[index];
+        dialogFactory.createEditDialog(taskObj);
     }
 
     function closeDialog() {
@@ -291,6 +304,7 @@ const eventHandlers = (function() {
         handleAddNewProject,
         handleInfoTaskClick,
         handleRemoveTaskClick,
+        handleEditTaskClick,
         closeDialog
     }
 
