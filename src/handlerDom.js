@@ -125,7 +125,10 @@ const handlerDom = (function (){
                 const img2 = new Image();
                 img2.src = myInfoImage;
                 img2.dataset.index = taskObj.index;
-                img2.addEventListener('click', eventHandlers.handleInfoTaskClick )
+                img2.addEventListener('click', (event) => {
+                    const index = event.target.dataset.index;
+                    eventHandlers.handleInfoTaskClick(index, projectTitle); 
+                } )
 
                 const img3 = new Image();
                 img3.src = myDeleteImage; 
@@ -260,8 +263,10 @@ const eventHandlers = (function() {
         } 
     }
 
-    function handleInfoTaskClick(event) {
-        console.log(event.target.dataset.index);
+    function handleInfoTaskClick(index, projectTitle) {
+        const myArray = storage.getTasksFormStorage(projectTitle);
+        const taskObj = myArray[index];
+        dialogFactory.createInfoDialog(taskObj);
     }
 
     function closeDialog() {

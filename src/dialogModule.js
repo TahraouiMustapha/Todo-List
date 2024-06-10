@@ -191,9 +191,14 @@ const dialogFactory = (function() {
         myDialog.showModal();
     }
 
+    function createInfoDialog(taskObj) {
+        console.log(taskObj)
+    }
+
     return {
         addTask,
-        createProjectDialog
+        createProjectDialog,
+        createInfoDialog
     }
 
 })(); 
