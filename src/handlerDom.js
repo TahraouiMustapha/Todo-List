@@ -133,6 +133,10 @@ const handlerDom = (function (){
                 const img3 = new Image();
                 img3.src = myDeleteImage; 
                 img3.dataset.index = taskObj.index;
+                img3.addEventListener('click', (event) => {
+                    const index = event.target.dataset.index;
+                    eventHandlers.handleRemoveTaskClick(index, projectTitle);
+                })
 
 
                 myDiv2.appendChild(myDate);
@@ -269,6 +273,14 @@ const eventHandlers = (function() {
         dialogFactory.createInfoDialog(taskObj);
     }
 
+    function handleRemoveTaskClick(index, projectTitle) {
+        const myArray = storage.getTasksFormStorage(projectTitle);
+        myArray.splice(index, 1);
+        let project = tasks.createProject(projectTitle, myArray);
+        storage.addInStorage(project);
+        handlerDom.showProject(projectTitle);
+    }
+
     function closeDialog() {
         const dialog = document.querySelector('dialog[open]');
         dialog.close();
@@ -278,6 +290,7 @@ const eventHandlers = (function() {
         handleAddNewTask,
         handleAddNewProject,
         handleInfoTaskClick,
+        handleRemoveTaskClick,
         closeDialog
     }
 
