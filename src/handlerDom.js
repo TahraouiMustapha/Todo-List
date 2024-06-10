@@ -120,12 +120,17 @@ const handlerDom = (function (){
 
                 const img1 = new Image();
                 img1.src = myEditImage;
+                img1.dataset.index = taskObj.index;
 
                 const img2 = new Image();
                 img2.src = myInfoImage;
+                img2.dataset.index = taskObj.index;
+                img2.addEventListener('click', eventHandlers.handleInfoTaskClick )
 
                 const img3 = new Image();
                 img3.src = myDeleteImage; 
+                img3.dataset.index = taskObj.index;
+
 
                 myDiv2.appendChild(myDate);
                 myDiv2.appendChild(img1);
@@ -185,6 +190,9 @@ const handlerDom = (function (){
             //add project title to get the task from localStorage
             myDiv.appendChild(createTaskDiv(task, dataTitle));
         })
+        //push the newArray after my edit on index of each project
+        let project = tasks.createProject(dataTitle, myArray);
+        storage.addInStorage(project);
 
         return myDiv;
     }
@@ -252,6 +260,10 @@ const eventHandlers = (function() {
         } 
     }
 
+    function handleInfoTaskClick(event) {
+        console.log(event.target.dataset.index);
+    }
+
     function closeDialog() {
         const dialog = document.querySelector('dialog[open]');
         dialog.close();
@@ -260,6 +272,7 @@ const eventHandlers = (function() {
     return {
         handleAddNewTask,
         handleAddNewProject,
+        handleInfoTaskClick,
         closeDialog
     }
 
