@@ -96,6 +96,10 @@ header .menu-btn {
     margin:8px 0; 
 }
 
+.task:hover {
+    background-color: #f1f5f9;
+}
+
 .task > div {
     display: flex;
     width: 160px;
@@ -140,7 +144,7 @@ header .menu-btn {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    background-color: #fff;
+    background-color: #f1f5f9;
 }
 
 .above-side ,
@@ -161,6 +165,7 @@ header .menu-btn {
     display: flex;
     flex-direction: column;
     gap:16px;
+    padding-bottom: 0px;
 }
 
 .menu .menu-btn {
@@ -169,7 +174,11 @@ header .menu-btn {
     align-items: center;
     padding: 0 16px;
     cursor: pointer;
-    background-color: #cbd5e1;
+    background-color: #fff;
+}
+
+.menu .menu-btn:hover {
+    border: 1px solid #22a694;
 }
 
 .menu .head ,
