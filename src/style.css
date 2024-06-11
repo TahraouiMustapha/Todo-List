@@ -172,8 +172,21 @@ header .menu-btn {
     background-color: #cbd5e1;
 }
 
-.menu .head {
+.menu .head ,
+.Crafted {
     padding: 16px;
+}
+
+.Crafted {
+    border-top: solid 0.5px #334155;   
+    font-size: 14px;
+    color:#475569;
+    text-align :center
+}
+
+.Crafted span {
+    color: #22a694;
+    font-size: 1.2em;
 }
 
 #add-project-btn ,
@@ -188,6 +201,8 @@ header .menu-btn {
     font-size: 18px;
     cursor: pointer;  
 }
+
+
 /* for dialog style */
 dialog[open] {
     border:none;
