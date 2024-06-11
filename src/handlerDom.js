@@ -5,6 +5,7 @@ import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
 import myDoneImage from './img/done.svg';
+import { getDefaultOptions } from "date-fns";
 
 
 const update = (function() {
@@ -76,9 +77,43 @@ const handlerDom = (function (){
         const btn = document.createElement('div');
         btn.classList.add('menu-btn');
         btn.dataset.title = dataTitle;
-        btn.textContent = dataTitle;
+            const p = document.createElement('p');
+            p.textContent = dataTitle;
+
+            const myDetails = document.createElement('div');
+            myDetails.classList.add('details-side');
+
+                const myIcon1 = new Image();
+                myIcon1.src = myEditImage;
+                myIcon1.setAttribute('id', 'edit-icon');
+
+                const myIcon2 = new Image();
+                myIcon2.src = myDeleteImage;
+                myIcon2.setAttribute('id', 'remove-icon');
+
+
+            myDetails.appendChild(myIcon1);
+            myDetails.appendChild(myIcon2);
+
+
+            btn.appendChild(p);
+            btn.appendChild(myDetails);
+            //event delegation
         btn.addEventListener('click', (e) => {
-            handlerDom.showProject(e.target.dataset.title);
+            let target = e.target;
+
+            switch(target.id) {
+                case 'edit-icon':
+                    console.log('edit');
+                    break;
+                case 'remove-icon':
+                    console.log('remove');
+                    break;
+                default:
+                    console.log('projectbtn')
+                handlerDom.showProject(e.currentTarget.dataset.title);
+            }
+
         });
 
         return btn;
