@@ -291,7 +291,26 @@ const eventHandlers = (function() {
     function handleEditTaskClick(index, projectTitle) {
         const myArray = storage.getTasksFormStorage(projectTitle);
         const taskObj = myArray[index];
-        dialogFactory.createEditDialog(taskObj);
+        dialogFactory.createEditDialog(taskObj, projectTitle);
+    }
+
+    function editTask(index, projectTitle) {
+        let title = document.querySelector('dialog[open] #title').value;
+        let desc = document.querySelector('dialog[open] #desc').value;
+        let dueDate = document.querySelector('dialog[open] #dueDate').value;
+        let priority = document.querySelector('dialog[open] #priority').value;
+
+        //create a new Task
+        const newTask = tasks.createTodos(title, desc, dueDate, priority);
+        //get array of tasks and replace the old task
+        const myArray = storage.getTasksFormStorage(projectTitle);
+        myArray[index] = newTask;
+        //create project with the edited task and push it
+        let newProject = tasks.createProject(projectTitle, myArray);
+        storage.addInStorage(newProject);
+        //update the display
+        update.tasksContainerUpdate(projectTitle);
+        closeDialog();
     }
 
     function closeDialog() {
@@ -305,6 +324,7 @@ const eventHandlers = (function() {
         handleInfoTaskClick,
         handleRemoveTaskClick,
         handleEditTaskClick,
+        editTask,
         closeDialog
     }
 

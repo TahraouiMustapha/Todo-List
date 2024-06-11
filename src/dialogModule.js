@@ -237,7 +237,7 @@ const dialogFactory = (function() {
         myDialog.showModal();
     }
 
-    function createEditDialog(taskObj) {
+    function createEditDialog(taskObj, projectTitle) {
         const myDialog = document.createElement('dialog');
         const myForm = document.createElement('form');
 
@@ -258,7 +258,7 @@ const dialogFactory = (function() {
             btn.type = 'submit';
             btn.addEventListener('click', (event) => {
                 event.preventDefault();
-                // eventHandlers.handleAddNewTask(dataTitle);
+                eventHandlers.editTask(taskObj.index, projectTitle);
             })
 
             const cancelBtn = document.createElement('button');
