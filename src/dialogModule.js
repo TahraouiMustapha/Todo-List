@@ -144,6 +144,7 @@ const dialogFactory = (function() {
             const btn = document.createElement('button');
             btn.textContent = 'Add';
             btn.type = 'submit';
+            btn.classList.add('active');
             btn.addEventListener('click', (event) => {
                 event.preventDefault();
                 eventHandlers.handleAddNewTask(dataTitle);
@@ -183,6 +184,7 @@ const dialogFactory = (function() {
                 const addBtn = document.createElement('button');
                 addBtn.textContent = 'Add';
                 addBtn.type = 'submit';
+                addBtn.classList.add('active');
                 addBtn.addEventListener('click', (event) => {
                     event.preventDefault();
                     eventHandlers.handleAddNewProject();
@@ -256,6 +258,7 @@ const dialogFactory = (function() {
             const btn = document.createElement('button');
             btn.textContent = 'Edit';
             btn.type = 'submit';
+            btn.classList.add('active');
             btn.addEventListener('click', (event) => {
                 event.preventDefault();
                 eventHandlers.editTask(taskObj.index, projectTitle);
