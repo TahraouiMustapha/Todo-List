@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { eventHandlers } from "./handlerDom.js";
+import { eventHandlers, update } from "./handlerDom.js";
 
 
 const dialogFactory = (function() {
@@ -301,6 +301,8 @@ const dialogFactory = (function() {
                 addBtn.addEventListener('click', (event) => {
                     event.preventDefault();
                     eventHandlers.editProject(projectTitle);
+                    update.menuUpdate();
+                    eventHandlers.closeDialog();
                 })
 
                 const cancelBtn = document.createElement('button');

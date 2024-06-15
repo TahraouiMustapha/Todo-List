@@ -20,6 +20,7 @@ const update = (function() {
 
     function menuUpdate() {
         const projectContainer = document.querySelector('.bottom-side .projects-container');
+        projectContainer.innerHTML = '';
         const arrayTitles = storage.getAllProjectTitles();
 
         arrayTitles.forEach((title) => {
@@ -353,6 +354,16 @@ const eventHandlers = (function() {
 
     function editProject(projectTitle) {
         let myArray = storage.getTasksFormStorage(projectTitle);
+        if(myArray !== null) {
+            storage.removeInStorage(projectTitle);
+        } else {
+            myArray = [];
+        }
+
+        //get the new title
+        const title = document.querySelector('dialog[open] #title') ;
+        let newProject = tasks.createProject(title.value, myArray);
+        storage.addInStorage(newProject);
     }
 
     function closeDialog() {
@@ -373,4 +384,4 @@ const eventHandlers = (function() {
 
 })()
 
-export { handlerDom, eventHandlers };
+export { handlerDom, eventHandlers, update };

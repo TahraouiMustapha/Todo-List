@@ -1,9 +1,14 @@
+import { remove } from "lodash";
 
 const storage = (function() {
     
     function addInStorage(project) {
         localStorage.setItem(project.title, 
                             JSON.stringify(project.array));
+    }
+
+    function removeInStorage(project) {
+        localStorage.removeItem(project);
     }
 
     function getTasksFormStorage(projectTitle) {
@@ -34,6 +39,7 @@ const storage = (function() {
         getTasksFormStorage,
         getLengthProject,
         getAllProjectTitles,
+        removeInStorage,
         isEmpty 
     }
 })();
