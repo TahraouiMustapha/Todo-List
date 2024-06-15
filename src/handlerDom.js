@@ -5,7 +5,6 @@ import myDeleteImage from './img/delete.svg';
 import myEditImage from './img/edit.svg';
 import myInfoImage from './img/info.svg';
 import myDoneImage from './img/done.svg';
-import { getDefaultOptions } from "date-fns";
 
 
 const update = (function() {
@@ -19,6 +18,8 @@ const update = (function() {
     }
 
     function menuUpdate() {
+        const projectHead = document.querySelector('.project-head');
+        projectHead.textContent = `Projects(${storage.getLocalStorageLength()})` ;
         const projectContainer = document.querySelector('.bottom-side .projects-container');
         projectContainer.innerHTML = '';
         const arrayTitles = storage.getAllProjectTitles();
@@ -306,6 +307,7 @@ const eventHandlers = (function() {
             let newProject = tasks.createProject(titleValue, []);
             projectContainer.appendChild( handlerDom.createProjectBtn(newProject.title));
             storage.addInStorage(newProject);
+            update.menuUpdate();
             closeDialog();
         } 
     }

@@ -30,6 +30,10 @@ const storage = (function() {
         return myArray.length;
     }
 
+    function getLocalStorageLength() {
+        return localStorage.length;
+    }
+
     function isEmpty() {
         return localStorage.length == 0 ? true : false ;
     }
@@ -40,6 +44,7 @@ const storage = (function() {
         getLengthProject,
         getAllProjectTitles,
         removeInStorage,
+        getLocalStorageLength,
         isEmpty 
     }
 })();
