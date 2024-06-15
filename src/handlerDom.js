@@ -85,10 +85,12 @@ const handlerDom = (function (){
 
                 const myIcon1 = new Image();
                 myIcon1.src = myEditImage;
+                myIcon1.dataset.title = dataTitle;
                 myIcon1.setAttribute('id', 'edit-icon');
 
                 const myIcon2 = new Image();
                 myIcon2.src = myDeleteImage;
+                myIcon2.dataset.title = dataTitle;
                 myIcon2.setAttribute('id', 'remove-icon');
 
 
@@ -104,14 +106,15 @@ const handlerDom = (function (){
 
             switch(target.id) {
                 case 'edit-icon':
-                    console.log('edit');
+                    //create dialog of edit project:
+                    dialogFactory.createDialogOfEditProject(e.currentTarget.dataset.title);
                     break;
                 case 'remove-icon':
-                    console.log('remove');
+                    //create dialog of remove project:
+                    dialogFactory.createDialogOfRemoveProject(e.currentTarget.dataset.title);
                     break;
                 default:
-                    console.log('projectbtn')
-                handlerDom.showProject(e.currentTarget.dataset.title);
+                    handlerDom.showProject(e.currentTarget.dataset.title);
             }
 
         });
@@ -348,6 +351,10 @@ const eventHandlers = (function() {
         closeDialog();
     }
 
+    function editProject(projectTitle) {
+        let myArray = storage.getTasksFormStorage(projectTitle);
+    }
+
     function closeDialog() {
         const dialog = document.querySelector('dialog[open]');
         dialog.close();
@@ -360,6 +367,7 @@ const eventHandlers = (function() {
         handleRemoveTaskClick,
         handleEditTaskClick,
         editTask,
+        editProject,
         closeDialog
     }
 

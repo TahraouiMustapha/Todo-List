@@ -283,11 +283,56 @@ const dialogFactory = (function() {
         myDialog.showModal();
     }
 
+    function createDialogOfEditProject(projectTitle) {
+        const myDialog = document.createElement('dialog');
+        const myForm = document.createElement('form');
+
+           //create inputs div:
+            const inputsDiv = document.createElement('div');
+            inputsDiv.classList.add('inputs');
+                inputsDiv.appendChild(createTitleInput(projectTitle));
+            //create div for btns
+            const dialogBtns = document.createElement('div');
+            dialogBtns.classList.add('dialogBtns');
+                const addBtn = document.createElement('button');
+                addBtn.textContent = 'Edit';
+                addBtn.type = 'submit';
+                addBtn.classList.add('active');
+                addBtn.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    eventHandlers.editProject(projectTitle);
+                })
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.type = 'button';
+
+                cancelBtn.addEventListener('click', eventHandlers.closeDialog );
+
+            dialogBtns.appendChild(cancelBtn);
+            dialogBtns.appendChild(addBtn);
+
+
+        myForm.appendChild(createHeadTitle('Edit Project'));
+        myForm.appendChild(inputsDiv);
+        myForm.appendChild(dialogBtns);
+
+        myDialog.appendChild(myForm);
+        document.body.appendChild(myDialog);
+        myDialog.showModal();
+    }
+
+    function createDialogOfRemoveProject(projectTitle) {
+        console.log(projectTitle);
+    }
+
     return {
         addTask,
         createProjectDialog,
         createInfoDialog,
-        createEditDialog
+        createEditDialog,
+        createDialogOfEditProject,
+        createDialogOfRemoveProject
     }
 
 })(); 
