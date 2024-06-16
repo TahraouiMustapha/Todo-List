@@ -368,6 +368,13 @@ const eventHandlers = (function() {
         storage.addInStorage(newProject);
     }
 
+    function removeProject(projectTitle) {
+        storage.removeInStorage(projectTitle);
+        update.menuUpdate();
+        update.mainUpdate();
+        closeDialog();
+    }
+
     function closeDialog() {
         const dialog = document.querySelector('dialog[open]');
         dialog.close();
@@ -381,6 +388,7 @@ const eventHandlers = (function() {
         handleEditTaskClick,
         editTask,
         editProject,
+        removeProject,
         closeDialog
     }
 

@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { eventHandlers, update } from "./handlerDom.js";
 import { doc } from "firebase/firestore";
+import { storage } from "./storageHandler.js";
 
 
 const dialogFactory = (function() {
@@ -348,8 +349,8 @@ const dialogFactory = (function() {
                 deleteBtn.textContent = 'Delete';
                 deleteBtn.classList.add('active');
                 deleteBtn.classList.add('delete-dialog');
-                deleteBtn.addEventListener('click', (event) => {
-                    console.log("project deleted");
+                deleteBtn.addEventListener('click', () => {
+                    eventHandlers.removeProject(projectTitle);
                 })
 
                 const cancelBtn = document.createElement('button');
