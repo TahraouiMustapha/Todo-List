@@ -19,7 +19,7 @@ const update = (function() {
 
     function menuUpdate() {
         const projectHead = document.querySelector('.project-head');
-        projectHead.textContent = `Projects(${storage.getLocalStorageLength()})` ;
+        projectHead.textContent = `Projects (${storage.getLocalStorageLength()})` ;
         const projectContainer = document.querySelector('.bottom-side .projects-container');
         projectContainer.innerHTML = '';
         const arrayTitles = storage.getAllProjectTitles();

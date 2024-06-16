@@ -295,6 +295,7 @@ dialog .dialogBtns {
     border:1px solid #22a694;
     background-color: #fff;
     cursor: pointer;
+    outline: none;
 }
 
 .dialogBtns .active {
@@ -330,3 +331,22 @@ dialog .textfields-div {
 .textField .infoName {
     font-weight: 600;
 }
+
+/* style for the dialog of remove*/
+.dialogHead.delete-dialog {
+    background-color: #dc2626;
+}
+
+.dialogHead.delete-dialog .closeX {
+    color:#dc2626;
+}
+
+button.delete-dialog {
+    border: 1px solid #dc2626;
+}
+
+.active.delete-dialog {
+    background-color: #dc2626;
+}
+
+

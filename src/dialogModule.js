@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { eventHandlers, update } from "./handlerDom.js";
+import { doc } from "firebase/firestore";
 
 
 const dialogFactory = (function() {
@@ -325,7 +326,51 @@ const dialogFactory = (function() {
     }
 
     function createDialogOfRemoveProject(projectTitle) {
-        console.log(projectTitle);
+        const myDialog = document.createElement('dialog');
+            const dialogHead = createHeadTitle('Delete Project');
+            dialogHead.classList.add('delete-dialog');
+
+            const inputsDiv = document.createElement('div');
+            inputsDiv.classList.add('inputs');
+                const areYouSure = document.createElement('div');
+                areYouSure.textContent = 'Are You Sure ?';
+
+                const confirmation = document.createElement('div');
+                confirmation.textContent = `Project ${projectTitle} will be Deleted !`;
+
+                inputsDiv.appendChild(areYouSure);
+                inputsDiv.appendChild(confirmation);
+
+            //create div for btns
+            const dialogBtns = document.createElement('div');
+            dialogBtns.classList.add('dialogBtns');
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Delete';
+                deleteBtn.classList.add('active');
+                deleteBtn.classList.add('delete-dialog');
+                deleteBtn.addEventListener('click', (event) => {
+                    console.log("project deleted");
+                })
+
+                const cancelBtn = document.createElement('button');
+                cancelBtn.textContent = 'Cancel';
+                cancelBtn.type = 'button';
+                cancelBtn.classList.add('delete-dialog');
+
+                cancelBtn.addEventListener('click', eventHandlers.closeDialog );
+
+            dialogBtns.appendChild(cancelBtn);
+            dialogBtns.appendChild(deleteBtn);    
+
+
+
+
+            myDialog.appendChild(dialogHead);
+            myDialog.appendChild(inputsDiv);
+            myDialog.appendChild(dialogBtns);
+
+        document.body.appendChild(myDialog);
+        myDialog.showModal();
     }
 
     return {

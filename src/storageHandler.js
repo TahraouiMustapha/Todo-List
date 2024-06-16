@@ -1,4 +1,3 @@
-import { remove } from "lodash";
 
 const storage = (function() {
     
