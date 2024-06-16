@@ -179,7 +179,7 @@ const handlerDom = (function (){
                 img3.dataset.index = taskObj.index;
                 img3.addEventListener('click', (event) => {
                     const index = event.target.dataset.index;
-                    eventHandlers.handleRemoveTaskClick(index, projectTitle);
+                    dialogFactory.createDialogOfRemoveTask(index, projectTitle);
                 })
 
 
@@ -327,6 +327,7 @@ const eventHandlers = (function() {
         storage.addInStorage(project);
         //update the display
         update.tasksContainerUpdate(projectTitle);
+        closeDialog();
     }
 
     function handleEditTaskClick(index, projectTitle) {
